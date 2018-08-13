@@ -20,6 +20,10 @@ public class HelloWorldEndPoint {
     @GET
     public Response printMessage() {
         Person lastPersonAdded = service.getLastPersonAdded();
+
+        if (lastPersonAdded == null) {
+            return Response.status(404).build();
+        }
         String result = "Hello !" + lastPersonAdded.name;
         return Response.status(200).entity(result).build();
     }

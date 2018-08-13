@@ -32,6 +32,9 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile("org.assertj:assertj-core:3.10.0")
+    testCompile group: 'org.jukito', name: 'jukito', version: '1.5'
+    testCompile "com.flextrade.jfixture:jfixture:2.7.2"
 
     annotationProcessor 'com.google.dagger:dagger-compiler:2.17'
 

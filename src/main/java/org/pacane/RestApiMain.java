@@ -29,7 +29,6 @@ public class RestApiMain {
         deployment.setApplication(exampleApplication);
         deployment.setInjectorFactoryClass("org.jboss.resteasy.cdi.CdiInjectorFactory");
 
-
         DeploymentInfo deploymentInfo = server.undertowDeployment(deployment, "/");
         deploymentInfo.setClassLoader(RestApiMain.class.getClassLoader());
         deploymentInfo.setDeploymentName("Undertow + Resteasy example");
