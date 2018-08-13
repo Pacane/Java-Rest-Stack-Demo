@@ -1,0 +1,46 @@
+plugins {
+    id "net.ltgt.apt" version "0.10"
+}
+
+group 'org.pacane'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+
+mainClassName = "org.pacane.Main"
+
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.17'
+
+    compile files("build/classes")
+
+    compile 'com.google.dagger:dagger:2.17'
+    compile group: 'io.undertow', name: 'undertow-core', version: '2.0.12.Final'
+    compile group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: '3.6.1.Final'
+    compile group: 'org.jboss.resteasy', name: 'resteasy-undertow', version: '3.6.1.Final'
+    compile group: 'org.jboss.resteasy', name: 'resteasy-cdi', version: '3.6.1.Final'
+    compile group: 'org.jboss.weld.servlet', name: 'weld-servlet-core', version: '3.0.5.Final'
+}
