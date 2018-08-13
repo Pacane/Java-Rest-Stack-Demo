@@ -3,7 +3,7 @@ import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.pacane.HelloWorldEndPoint;
+import org.pacane.PersonEndPoint;
 import org.pacane.Person;
 import org.pacane.PersonService;
 
@@ -18,7 +18,7 @@ public class EndPointTest {
     @Inject
     PersonService personService;
     @Inject
-    HelloWorldEndPoint helloWorldEndPoint;
+    PersonEndPoint personEndPoint;
 
     private JFixture fixture = new JFixture();
 
@@ -26,7 +26,7 @@ public class EndPointTest {
     public void returns404WhenPersonNotFound() {
         given(personService.getLastPersonAdded()).willReturn(null);
 
-        Response response = helloWorldEndPoint.printMessage();
+        Response response = personEndPoint.getLastPerson();
 
         assertThat(response.getStatus()).isEqualTo(404);
     }
@@ -36,7 +36,7 @@ public class EndPointTest {
         Person somePerson = fixture.create(Person.class);
         given(personService.getLastPersonAdded()).willReturn(somePerson);
 
-        Response response = helloWorldEndPoint.printMessage();
+        Response response = personEndPoint.getLastPerson();
 
         assertThat(response.getStatus()).isEqualTo(200);
     }

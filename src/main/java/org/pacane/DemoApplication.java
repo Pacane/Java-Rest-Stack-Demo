@@ -4,10 +4,10 @@ import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ExampleApplication extends Application {
-    private final PersonApp app;
+public class DemoApplication extends Application {
+    private final PersonComponent app;
 
-    public ExampleApplication(PersonApp app) {
+    public DemoApplication(PersonComponent app) {
         this.app = app;
     }
 

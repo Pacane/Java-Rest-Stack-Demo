@@ -7,24 +7,29 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/hello")
-@Produces(MediaType.TEXT_PLAIN)
-public class HelloWorldEndPoint {
+@Path("/people")
+@Produces(MediaType.APPLICATION_JSON)
+public class PersonEndPoint {
     private final PersonService service;
+    private final PersonConverter personConverter;
 
     @Inject
-    HelloWorldEndPoint(PersonService service) {
+    PersonEndPoint(PersonService service, PersonConverter personConverter) {
         this.service = service;
+        this.personConverter = personConverter;
     }
 
     @GET
-    public Response printMessage() {
+    @Path("/last")
+    public Response getLastPerson() {
         Person lastPersonAdded = service.getLastPersonAdded();
 
         if (lastPersonAdded == null) {
             return Response.status(404).build();
         }
-        String result = "Hello !" + lastPersonAdded.name;
-        return Response.status(200).entity(result).build();
+
+        String jsonPerson = personConverter.toJson(lastPersonAdded);
+
+        return Response.status(200).entity(jsonPerson).build();
     }
 }

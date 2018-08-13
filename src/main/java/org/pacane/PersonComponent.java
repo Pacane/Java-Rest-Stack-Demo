@@ -6,8 +6,8 @@ import javax.inject.Singleton;
 
 @Singleton
 @Component(modules = {PersonModule.class})
-public interface PersonApp {
-    HelloWorldEndPoint getHelloWorldResource();
+public interface PersonComponent {
+    PersonEndPoint getHelloWorldResource();
 
     PersonService getPersonService();
 }

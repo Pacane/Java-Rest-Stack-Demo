@@ -11,29 +11,21 @@ public class RestApiMain {
     private static final String APPLICATION_PATH = "/api";
 
     public static void main(String[] args) {
-        org.pacane.PersonApp app = org.pacane.DaggerPersonApp.builder().build();
+        PersonComponent app = DaggerPersonComponent.builder().build();
 
-        PersonService service = app.getPersonService();
-        Person p1 = new Person();
-        p1.name = "Kenneth";
-        p1.age = 25;
-
-        service.add(p1);
+        bootstrapRepository(app);
 
         UndertowJaxrsServer server = new UndertowJaxrsServer();
 
         ResteasyDeployment deployment = new ResteasyDeployment();
-
-        ExampleApplication exampleApplication = new ExampleApplication(app);
-
-        deployment.setApplication(exampleApplication);
+        DemoApplication demoApplication = new DemoApplication(app);
+        deployment.setApplication(demoApplication);
         deployment.setInjectorFactoryClass("org.jboss.resteasy.cdi.CdiInjectorFactory");
 
         DeploymentInfo deploymentInfo = server.undertowDeployment(deployment, "/");
         deploymentInfo.setClassLoader(RestApiMain.class.getClassLoader());
         deploymentInfo.setDeploymentName("Undertow + Resteasy example");
         deploymentInfo.setContextPath(APPLICATION_PATH);
-
         deploymentInfo.addListener(Servlets.listener(org.jboss.weld.environment.servlet.Listener.class));
 
         server.deploy(deploymentInfo);
@@ -41,5 +33,14 @@ public class RestApiMain {
                 .addHttpListener(8080, "localhost");
 
         server.start(builder);
+    }
+
+    private static void bootstrapRepository(PersonComponent app) {
+        PersonService service = app.getPersonService();
+        Person p1 = new Person();
+        p1.name = "Kenneth";
+        p1.age = 25;
+
+        service.add(p1);
     }
 }
