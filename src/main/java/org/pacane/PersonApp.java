@@ -8,5 +8,6 @@ import javax.inject.Singleton;
 @Component(modules = {PersonModule.class})
 public interface PersonApp {
     HelloWorldEndPoint getHelloWorldResource();
+
     PersonService getPersonService();
 }
