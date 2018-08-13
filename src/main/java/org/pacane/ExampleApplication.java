@@ -5,15 +5,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ExampleApplication extends Application {
+    private final PersonApp app;
+
+    public ExampleApplication(PersonApp app) {
+        this.app = app;
+    }
+
     @Override
     public Set<Class<?>> getClasses() {
-        Set<Class<?>> classes = new HashSet<>();
-        classes.add(HelloWorldResource.class);
-        return classes;
+        return super.getClasses();
     }
 
     @Override
     public Set<Object> getSingletons() {
-        return super.getSingletons();
+        HashSet<Object> objects = new HashSet<>();
+        objects.add(app.getHelloWorldResource());
+        return objects;
     }
 }

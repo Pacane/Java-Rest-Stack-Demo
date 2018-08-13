@@ -39,6 +39,7 @@ dependencies {
 
     compile 'com.google.dagger:dagger:2.17'
     compile group: 'io.undertow', name: 'undertow-core', version: '2.0.12.Final'
+    compile group: 'org.jboss.resteasy', name: 'resteasy-guice', version: '3.6.1.Final'
     compile group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: '3.6.1.Final'
     compile group: 'org.jboss.resteasy', name: 'resteasy-undertow', version: '3.6.1.Final'
     compile group: 'org.jboss.resteasy', name: 'resteasy-cdi', version: '3.6.1.Final'

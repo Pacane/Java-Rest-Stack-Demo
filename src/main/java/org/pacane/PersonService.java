@@ -1,24 +1,22 @@
 package org.pacane;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class PersonService {
     private final PersonRepository repository;
-    private final PersonPrinter printer;
 
     @Inject
-    PersonService(PersonRepository repository, PersonPrinter printer) {
+    PersonService(PersonRepository repository) {
         this.repository = repository;
-        this.printer = printer;
     }
 
     void add(Person p) {
         repository.add(p);
     }
 
-    void printLastAddedPerson() {
-        Person person = repository.getLastInsertedPerson();
-
-        printer.print(person);
+    public Person getLastPersonAdded() {
+        return repository.getLastInsertedPerson();
     }
 }
