@@ -18,10 +18,6 @@ public class PersonRepository {
         persons.put(++idSeed, p);
     }
 
-    Person getById(int id) {
-        return persons.get(id);
-    }
-
     Person getLastInsertedPerson() {
         return persons.get(idSeed);
     }
